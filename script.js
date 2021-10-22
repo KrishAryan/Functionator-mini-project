@@ -2,6 +2,7 @@ let myBlock;
 let upButton;
 let myFunctionList;
 let funList=[];
+const movementArray = ["right","left","up","down"]
 document.addEventListener("DOMContentLoaded",function(){
     myBlock = document.createElement("div") 
     myBlock.textContent = "Hello world";
@@ -28,6 +29,7 @@ document.addEventListener("keydown",function(e){
     else if(e.keyCode==38)addFun("up");
     else if(e.keyCode==37)addFun("left");
     else if(e.keyCode==67){myBlock.style.backgroundColor=randomColor()}
+    else if(e.keyCode==82){addFun(movementArray[Math.floor(Math.random()*movementArray.length)])}
     else if(e.keyCode === 13 || e.keyCode ===32)mover();
     
     
@@ -55,8 +57,9 @@ function mover() {
         {
             myBlock.style.top=cur.top+cur.width+"px";
         }
-        setTimeout(mover,300)
-        console.log(cur)
+        else{myBlock.innerHTML="Seth Path "}
+        setTimeout(mover,1500)
+      //  console.log(cur)
     }
 }
 
@@ -74,6 +77,11 @@ function addFun(val){
         this.style.backgroundColor="white"
         this.style.color="black"
         })
+    span.addEventListener("click",function(){
+       let curIndex=funList.indexOf(this);
+       let tempRemove=funList.splice(curIndex,1);
+       myFunctionList.removeChild(this)
+    })
     
     myFunctionList.appendChild(span)
     funList.push(span);
